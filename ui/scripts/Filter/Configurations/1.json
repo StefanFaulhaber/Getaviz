@@ -1,0 +1,35 @@
+{
+	"containers": [
+		{
+			"type": 0,
+			"activated": true,
+			"relations": false,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "com.android.phone.ADNList",
+					"includeChilds": true
+				},
+				{
+					"activated": true,
+					"query": "com.android.phone.EmergencyDialer",
+					"includeChilds": true
+				}
+			]
+		},
+		{
+			"type": 5,
+			"activated": true,
+			"relations": true,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "",
+					"includeChilds": true
+				}
+			]
+		}
+	]
+}

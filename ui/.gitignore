@@ -1,0 +1,6 @@
+# models
+data/
+
+# editor settings
+.vscode/
+*.code-workspace

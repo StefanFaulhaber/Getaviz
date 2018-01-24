@@ -5,15 +5,12 @@
 			logActionConsole: false,
 			logEventConsole: false
 		},
-		{ name: 'canvasGridController' },
-		{ name: 'packageExplorerController' },
 		{ name: 'canvasHoverController' },
 		{ name: 'canvasFilterController' },
-		{ name: 'canvasFlyToController' },
 		{
 			name: 'filterController',
-			devMode: true,
-			configuration: 'example.json'
+			devMode: false
+			// configuration: '1.json'
 		}
 	],
 	uis: [
@@ -43,7 +40,6 @@
 					canvas: {},
 					controllers: [
 						{ name: 'defaultLogger' },
-						{ name: 'canvasGridController' },
 						{ name: 'canvasHoverController' },
 						{ name: 'canvasFilterController' }
 					]

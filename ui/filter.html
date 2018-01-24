@@ -2,7 +2,8 @@
 
 <script type="text/javascript">
   // change model here and in MultiPart-Element at the bottom
-  var model = "City bricks freemind";
+  var models = ["City bricks freemind", "City bricks mini", "City floor findbugs", "City original freemind", "City panels freemind", "Plant freemind", "RD bank", "RD dynamic ruby", "RD findbugs", "RD freemind"];
+  var model = models[1];
   var multipartX3dUrl = "data/" + model + "/model/multiPart.x3d";
   var multipartJsonUrl = "data/" + model + "/model/multiPart.json";
   var metaDataJsonUrl = "data/" + model + "/model/metaData.json";
@@ -75,9 +76,6 @@
 
   <!-- setup -->
   <script type="text/javascript" src="setups/test/filter.js"></script>
-
-  <!-- CSS workaround -->
-  <!-- <link rel="stylesheet" href="scripts/Filter/filter.css" type="text/css" /> -->
 </head>
 
 <body>
@@ -85,7 +83,7 @@
     <x3d id="x3dElement" showConsole="true">
       <scene id="scene">
         <Transform id="addedElements"></Transform>
-        <MultiPart id="multiPart" mapDEFToID="true" url="data/City bricks freemind/model/multiPart.x3d" urlIDMap="data/City bricks freemind/model/multiPart.json"></MultiPart>
+        <MultiPart id="multiPart" mapDEFToID="true" url="data/City bricks mini/model/multiPart.x3d" urlIDMap="data/City bricks mini/model/multiPart.json"></MultiPart>
       </scene>
     </x3d>
   </div>

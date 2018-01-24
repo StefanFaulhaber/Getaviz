@@ -6,9 +6,13 @@ var filterController = (function() {
 
 	function initialize(setupConfig) {
 		// add corresponding CSS file to filter.html
-		addCSSFile();
+		let cssLink = document.createElement('link');
+		cssLink.type = 'text/css';
+		cssLink.rel = 'stylesheet';
+		cssLink.href = 'scripts/Filter/filter.css';
+		document.getElementsByTagName('head')[0].appendChild(cssLink);
 
-		// get development mode indicator of setup configuration
+		// setup filter configuration
 		devMode = setupConfig.devMode != false;
 		configuration = setupConfig.configuration
 			? setupConfig.configuration
@@ -28,14 +32,6 @@ var filterController = (function() {
 
 	function reset() {
 		filter.reset();
-	}
-
-	function addCSSFile() {
-		let cssLink = document.createElement('link');
-		cssLink.type = 'text/css';
-		cssLink.rel = 'stylesheet';
-		cssLink.href = 'scripts/Filter/filter.css';
-		document.getElementsByTagName('head')[0].appendChild(cssLink);
 	}
 
 	return {
