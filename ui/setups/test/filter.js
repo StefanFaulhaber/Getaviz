@@ -9,8 +9,8 @@
 		{ name: 'canvasFilterController' },
 		{
 			name: 'filterController',
-			devMode: false
-			// configuration: '1.json'
+			devMode: false,
+			configuration: 'Aufgabe6.json'
 		}
 	],
 	uis: [

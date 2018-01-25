@@ -1,0 +1,35 @@
+{
+	"containers": [
+		{
+			"type": 0,
+			"activated": true,
+			"relations": false,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "com.android.phone.OtaStartupReceiver",
+					"includeChilds": true
+				},
+				{
+					"activated": true,
+					"query": "com.android.phone.OtaUtils",
+					"includeChilds": true
+				}
+			]
+		},
+		{
+			"type": 5,
+			"activated": true,
+			"relations": false,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "",
+					"includeChilds": true
+				}
+			]
+		}
+	]
+}

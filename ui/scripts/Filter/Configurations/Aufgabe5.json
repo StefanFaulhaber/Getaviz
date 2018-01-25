@@ -1,0 +1,40 @@
+{
+	"containers": [
+		{
+			"type": 0,
+			"activated": true,
+			"relations": true,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": false,
+					"query": "com.android.phone.CallCard.displayMainCallStatus(Phone,Call)",
+					"includeChilds": true
+				},
+				{
+					"activated": false,
+					"query": "com.android.phone.CallCard.stopTimer()",
+					"includeChilds": true
+				},
+				{
+					"activated": true,
+					"query": "com.android.phone.CallCard.onClick(View)",
+					"includeChilds": true
+				}
+			]
+		},
+		{
+			"type": 5,
+			"activated": true,
+			"relations": false,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "",
+					"includeChilds": true
+				}
+			]
+		}
+	]
+}
