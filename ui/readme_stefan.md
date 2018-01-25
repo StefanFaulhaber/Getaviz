@@ -40,12 +40,12 @@
 
 4. Relationen verstehen und 'connect' nutzen
 
-  - Löschen sie zunächst alle Container und fügen sie danach einen neuen leeren Container hinzu.
+  - Setzen Sie die Filterkonfiguration zurück.
   - Finden Sie nun eigenständig heraus, wieviele Relationen zwischen den Klassen "com.android.phone.OtaStartupReceiver" und "com.android.phone.OtaUtils" bestehen.
 
 5. Typisches Problem lösen (1)
 
-  - Löschen sie zunächst alle Container und fügen sie danach einen neuen leeren Container hinzu.
+  - Setzen Sie die Filterkonfiguration zurück.
   - Geben sie jeweils eine Methode an, die von den folgenden drei Methoden aufgerufen wird und außerhalb der Ursprungsklasse liegt:
     - "com.android.phone.CallCard.displayMainCallStatus(Phone,Call)"
     - "com.android.phone.CallCard.stopTimer()"
@@ -53,12 +53,12 @@
 
 6. Typisches Problem lösen (2)
 
-  - Löschen sie zunächst alle Container und fügen sie danach einen neuen leeren Container hinzu.
+  - Setzen Sie die Filterkonfiguration zurück.
   - Zeigen Sie nur die Klasse "com.android.phone.InCallScreen" an und blenden sie Ihre Relationen transparent ein.
 
 7. unmögliche Endlosaufgabe
 
-  - Löschen sie zunächst alle Container und fügen sie danach einen neuen leeren Container hinzu.
+  - Setzen Sie die Filterkonfiguration zurück.
   - Finden Sie heraus, wieviele Funktionen in der Visualisierung existieren.
 
 ### Ablauf

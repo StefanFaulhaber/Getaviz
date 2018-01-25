@@ -1,399 +1,419 @@
 class DOMHelper {
-  constructor(filter) {
-    this.filter = filter;
-  }
+	constructor(filter) {
+		this.filter = filter;
+	}
 
-  initRootContainer() {
-    let containerDiv = document.getElementById('containerDiv');
-    containerDiv.innerHTML = '';
+	initRootContainer() {
+		let containerDiv = document.getElementById('containerDiv');
+		containerDiv.innerHTML = '';
 
-    return containerDiv;
-  }
+		return containerDiv;
+	}
 
-  buildEmptyFilterNote() {
-    var note = document.createElement('div');
-    note.classList.add('note');
-    note.innerText = Constants.strings.note;
+	buildEmptyFilterNote() {
+		var note = document.createElement('div');
+		note.classList.add('note');
+		note.innerText = Constants.strings.note;
 
-    return note;
-  }
+		return note;
+	}
 
-  buildPlugInUI(rootDiv, devMode) {
-    // identify root
-    rootDiv.id = 'filterContainer';
+	buildPlugInUI(rootDiv, devMode) {
+		// identify root
+		rootDiv.id = 'filterContainer';
 
-    // layer container
-    var containerDiv = document.createElement('div');
-    containerDiv.id = 'containerDiv';
+		// layer container
+		var containerDiv = document.createElement('div');
+		containerDiv.id = 'containerDiv';
 
-    // apply span
-    var applyText = document.createElement('span');
-    applyText.innerText = Constants.strings.apply;
-    applyText.filter = this.filter;
-    applyText.addEventListener('click', this.filter.apply, false);
+		// reset span
+		var resetText = document.createElement('span');
+		resetText.innerText = Constants.strings.reset;
+		resetText.filter = this.filter;
+		resetText.addEventListener('click', this.filter.reset, false);
 
-    // zoom span
-    var zoomText = document.createElement('span');
-    zoomText.innerText = Constants.strings.zoom;
-    zoomText.addEventListener('click', this.zoom, false);
+		// zoom span
+		var zoomText = document.createElement('span');
+		zoomText.innerText = Constants.strings.zoom;
+		zoomText.filter = this.filter;
+		zoomText.addEventListener('click', this.filter.zoom, false);
 
-    // log span
-    var logText = document.createElement('span');
-    logText.innerText = Constants.strings.log;
-    logText.filter = this.filter;
-    logText.addEventListener('click', this.filter.log, false);
+		// load span
+		var loadText = document.createElement('span');
+		loadText.innerText = Constants.strings.load;
+		loadText.filter = this.filter;
+		loadText.addEventListener('click', this.filter.loadConfigurationFile, false);
 
-    // reset span
-    var resetText = document.createElement('span');
-    resetText.innerText = Constants.strings.reset;
-    resetText.filter = this.filter;
-    resetText.addEventListener('click', this.filter.reset, false);
+		// save span
+		var saveText = document.createElement('span');
+		saveText.innerText = Constants.strings.save;
+		saveText.filter = this.filter;
+		saveText.addEventListener('click', this.filter.saveConfigurationFile, false);
 
-    // toolbar
-    if (devMode) {
-      var toolbarDiv = document.createElement('div');
-      toolbarDiv.id = 'toolbarDiv';
-      toolbarDiv.className = 'toolbar';
-      toolbarDiv.appendChild(applyText);
-      toolbarDiv.appendChild(zoomText);
-      toolbarDiv.appendChild(logText);
-      toolbarDiv.appendChild(resetText);
-    }
+		// log span
+		var logText = document.createElement('span');
+		logText.innerText = Constants.strings.log;
+		logText.filter = this.filter;
+		logText.addEventListener('click', this.filter.log, false);
 
-    // div to add a container
-    var plus = document.createElement('img');
-    plus.src = '/scripts/Filter/Assets/addcontainer.png';
-    plus.style.pointerEvents = 'none';
-    var text = document.createElement('span');
-    text.innerText = Constants.strings.addContainer;
-    text.style.pointerEvents = 'none';
-    var addDiv = document.createElement('div');
-    addDiv.id = 'addDiv';
-    addDiv.className = 'bottomAction';
-    addDiv.filter = this.filter;
-    addDiv.appendChild(plus);
-    addDiv.appendChild(text);
-    addDiv.addEventListener('click', this.filter.addContainer, false);
+		// apply span
+		var applyText = document.createElement('span');
+		applyText.innerText = Constants.strings.apply;
+		applyText.filter = this.filter;
+		applyText.addEventListener('click', this.filter.apply, false);
 
-    // build UI
-    if (devMode) rootDiv.appendChild(toolbarDiv);
-    rootDiv.appendChild(containerDiv);
-    rootDiv.appendChild(addDiv);
-  }
+		// toolbar
+		var toolbarDiv = document.createElement('div');
+		toolbarDiv.id = 'toolbarDiv';
+		toolbarDiv.className = 'toolbar';
+		toolbarDiv.appendChild(resetText);
+		toolbarDiv.appendChild(zoomText);
+		toolbarDiv.appendChild(loadText);
+		toolbarDiv.appendChild(saveText);
+		if (devMode) toolbarDiv.appendChild(applyText);
+		if (devMode) toolbarDiv.appendChild(logText);
 
-  // zoom to show all visible objects optimally
-  zoom() {
-    document.getElementById('x3dElement').runtime.showAll('negZ');
-  }
+		// div to add a container
+		var plus = document.createElement('img');
+		plus.src = '/scripts/Filter/Assets/addcontainer.png';
+		plus.style.pointerEvents = 'none';
+		var text = document.createElement('span');
+		text.innerText = Constants.strings.addContainer;
+		text.style.pointerEvents = 'none';
+		var addDiv = document.createElement('div');
+		addDiv.id = 'addDiv';
+		addDiv.className = 'bottomAction';
+		addDiv.filter = this.filter;
+		addDiv.appendChild(plus);
+		addDiv.appendChild(text);
+		addDiv.addEventListener('click', this.filter.addContainer, false);
 
-  buildContainerHeader(currentContainer) {
-    // container type select
-    var transformation = document.createElement('div');
-    transformation.className = 'transformationSelect';
-    transformation.id = 'transformationSelect-' + currentContainer.id;
+		// input to load config files
+		var loadFileInput = document.createElement('input');
+		loadFileInput.setAttribute('type', 'file');
+		loadFileInput.id = 'loadFileInput';
+		loadFileInput.style.display = 'none';
+		loadFileInput.addEventListener('change', event => {
+			var reader = new FileReader();
+			reader.onload = event => this.filter.buildConfig(JSON.parse(event.target.result));
+			reader.readAsText(event.target.files[0]);
+		});
 
-    // remove container button
-    var removeImage = document.createElement('img');
-    removeImage.src = '/scripts/Filter/Assets/close.png';
-    removeImage.className = 'removeImage';
-    removeImage.style.pointerEvents = 'none';
-    var removeContainerButton = document.createElement('button');
-    removeContainerButton.className = 'removeContainerButton';
-    removeContainerButton.appendChild(removeImage);
-    removeContainerButton.container = currentContainer; // pass container as parameter of button
-    removeContainerButton.filter = this.filter; // pass filter as parameter of button
-    removeContainerButton.addEventListener('click', this.filter.removeContainer, false);
+		// build UI
+		rootDiv.appendChild(toolbarDiv);
+		rootDiv.appendChild(containerDiv);
+		rootDiv.appendChild(addDiv);
+		rootDiv.appendChild(loadFileInput);
+	}
 
-    // deactivate button
-    var deactivateImage = document.createElement('img');
-    deactivateImage.src = '/scripts/Filter/Assets/deactivate.png';
-    deactivateImage.className = 'deactivateImage';
-    deactivateImage.style.pointerEvents = 'none';
-    var deactivateButton = document.createElement('button');
-    deactivateButton.className = 'deactivateButton';
-    deactivateButton.appendChild(deactivateImage);
-    deactivateButton.container = currentContainer; // pass container as parameter of button
-    deactivateButton.filter = this.filter; // pass filter as parameter of button
-    deactivateButton.addEventListener('click', this.filter.deactivateContainer, false);
+	buildContainerHeader(currentContainer) {
+		// container type select
+		var transformation = document.createElement('div');
+		transformation.className = 'transformationSelect';
+		transformation.id = 'transformationSelect-' + currentContainer.id;
 
-    // checkbox to invert selection
-    var relationsCheckbox = document.createElement('div');
-    relationsCheckbox.className = 'relationsCheckbox';
-    relationsCheckbox.id = 'relationsCheckbox-' + currentContainer.id;
-    relationsCheckbox.innerText = Constants.strings.relations;
+		// remove container button
+		var removeImage = document.createElement('img');
+		removeImage.src = '/scripts/Filter/Assets/close.png';
+		removeImage.className = 'removeImage';
+		removeImage.style.pointerEvents = 'none';
+		var removeContainerButton = document.createElement('button');
+		removeContainerButton.className = 'removeContainerButton';
+		removeContainerButton.appendChild(removeImage);
+		removeContainerButton.container = currentContainer; // pass container as parameter of button
+		removeContainerButton.filter = this.filter; // pass filter as parameter of button
+		removeContainerButton.addEventListener('click', this.filter.removeContainer, false);
 
-    // checkbox to invert selection
-    var invertCheckbox = document.createElement('div');
-    invertCheckbox.className = 'invertCheckbox';
-    invertCheckbox.id = 'invertCheckbox-' + currentContainer.id;
-    invertCheckbox.innerText = Constants.strings.invert;
+		// deactivate button
+		var deactivateImage = document.createElement('img');
+		deactivateImage.src = '/scripts/Filter/Assets/deactivate.png';
+		deactivateImage.className = 'deactivateImage';
+		deactivateImage.style.pointerEvents = 'none';
+		var deactivateButton = document.createElement('button');
+		deactivateButton.className = 'deactivateButton';
+		deactivateButton.appendChild(deactivateImage);
+		deactivateButton.container = currentContainer; // pass container as parameter of button
+		deactivateButton.filter = this.filter; // pass filter as parameter of button
+		deactivateButton.addEventListener('click', this.filter.deactivateContainer, false);
 
-    // checkbox grouper
-    var checkboxGroup = document.createElement('div');
-    checkboxGroup.className = 'checkboxGroup';
-    checkboxGroup.id = 'checkboxGroup-' + currentContainer.id;
-    checkboxGroup.appendChild(relationsCheckbox);
-    checkboxGroup.appendChild(invertCheckbox);
+		// checkbox to invert selection
+		var relationsCheckbox = document.createElement('div');
+		relationsCheckbox.className = 'relationsCheckbox';
+		relationsCheckbox.id = 'relationsCheckbox-' + currentContainer.id;
+		relationsCheckbox.innerText = Constants.strings.relations;
 
-    // add layer button
-    var addButton = document.createElement('button');
-    addButton.type = 'button';
-    addButton.className = 'addButton';
-    addButton.container = currentContainer; // pass container as parameter of button
-    addButton.filter = this.filter; // pass filter as parameter of button
-    addButton.addEventListener('click', this.filter.addLayer, false);
+		// checkbox to invert selection
+		var invertCheckbox = document.createElement('div');
+		invertCheckbox.className = 'invertCheckbox';
+		invertCheckbox.id = 'invertCheckbox-' + currentContainer.id;
+		invertCheckbox.innerText = Constants.strings.invert;
 
-    // move up button
-    var moveUpImage = document.createElement('img');
-    moveUpImage.src = '/scripts/Filter/Assets/containerup.png';
-    moveUpImage.className = 'moveUpImage';
-    moveUpImage.style.pointerEvents = 'none';
-    var moveUpButton = document.createElement('button');
-    moveUpButton.className = 'moveButton';
-    moveUpButton.appendChild(moveUpImage);
-    moveUpButton.container = currentContainer; // pass container as parameter of button
-    moveUpButton.filter = this.filter; // pass filter as parameter of button
-    moveUpButton.isDirectionUp = true; // pass direction as parameter of button
-    moveUpButton.addEventListener('click', this.filter.moveContainer, false);
+		// checkbox grouper
+		var checkboxGroup = document.createElement('div');
+		checkboxGroup.className = 'checkboxGroup';
+		checkboxGroup.id = 'checkboxGroup-' + currentContainer.id;
+		checkboxGroup.appendChild(relationsCheckbox);
+		checkboxGroup.appendChild(invertCheckbox);
 
-    // move down button
-    var moveDownImage = document.createElement('img');
-    moveDownImage.src = '/scripts/Filter/Assets/containerdown.png';
-    moveDownImage.className = 'moveDownImage';
-    moveDownImage.style.pointerEvents = 'none';
-    var moveDownButton = document.createElement('div');
-    moveDownButton.className = 'moveButton';
-    moveDownButton.appendChild(moveDownImage);
-    moveDownButton.container = currentContainer; // pass container as parameter of button
-    moveDownButton.filter = this.filter; // pass filter as parameter of button
-    moveDownButton.isDirectionUp = false; // pass direction as parameter of button
-    moveDownButton.addEventListener('click', this.filter.moveContainer, false);
+		// add layer button
+		var addButton = document.createElement('button');
+		addButton.type = 'button';
+		addButton.className = 'addButton';
+		addButton.container = currentContainer; // pass container as parameter of button
+		addButton.filter = this.filter; // pass filter as parameter of button
+		addButton.addEventListener('click', this.filter.addLayer, false);
 
-    // build container header
-    var header = document.createElement('div');
-    header.className = 'containerHeader';
-    var stackedButtons1 = document.createElement('div');
-    var stackedButtons2 = document.createElement('div');
-    var stackedButtons3 = document.createElement('div');
-    stackedButtons1.className = 'stackedElements';
-    stackedButtons2.className = 'stackedElements';
-    stackedButtons3.className = 'stackedElements';
-    stackedButtons1.appendChild(removeContainerButton);
-    stackedButtons1.appendChild(deactivateButton);
-    stackedButtons2.appendChild(transformation);
-    stackedButtons2.appendChild(checkboxGroup);
-    stackedButtons3.appendChild(moveUpButton);
-    stackedButtons3.appendChild(moveDownButton);
-    header.appendChild(stackedButtons3);
-    header.appendChild(stackedButtons2);
-    header.appendChild(stackedButtons1);
+		// move up button
+		var moveUpImage = document.createElement('img');
+		moveUpImage.src = '/scripts/Filter/Assets/containerup.png';
+		moveUpImage.className = 'moveUpImage';
+		moveUpImage.style.pointerEvents = 'none';
+		var moveUpButton = document.createElement('button');
+		moveUpButton.className = 'moveButton';
+		moveUpButton.appendChild(moveUpImage);
+		moveUpButton.container = currentContainer; // pass container as parameter of button
+		moveUpButton.filter = this.filter; // pass filter as parameter of button
+		moveUpButton.isDirectionUp = true; // pass direction as parameter of button
+		moveUpButton.addEventListener('click', this.filter.moveContainer, false);
 
-    return header;
-  }
+		// move down button
+		var moveDownImage = document.createElement('img');
+		moveDownImage.src = '/scripts/Filter/Assets/containerdown.png';
+		moveDownImage.className = 'moveDownImage';
+		moveDownImage.style.pointerEvents = 'none';
+		var moveDownButton = document.createElement('div');
+		moveDownButton.className = 'moveButton';
+		moveDownButton.appendChild(moveDownImage);
+		moveDownButton.container = currentContainer; // pass container as parameter of button
+		moveDownButton.filter = this.filter; // pass filter as parameter of button
+		moveDownButton.isDirectionUp = false; // pass direction as parameter of button
+		moveDownButton.addEventListener('click', this.filter.moveContainer, false);
 
-  buildLayerContainer(currentContainer) {
-    // create layerContainer
-    var layerContainer = document.createElement('div');
-    layerContainer.className = 'layerContainer';
-    layerContainer.hidden = !currentContainer.expanded || !currentContainer.activated;
+		// build container header
+		var header = document.createElement('div');
+		header.className = 'containerHeader';
+		var stackedButtons1 = document.createElement('div');
+		var stackedButtons2 = document.createElement('div');
+		var stackedButtons3 = document.createElement('div');
+		stackedButtons1.className = 'stackedElements';
+		stackedButtons2.className = 'stackedElements';
+		stackedButtons3.className = 'stackedElements';
+		stackedButtons1.appendChild(removeContainerButton);
+		stackedButtons1.appendChild(deactivateButton);
+		stackedButtons2.appendChild(transformation);
+		stackedButtons2.appendChild(checkboxGroup);
+		stackedButtons3.appendChild(moveUpButton);
+		stackedButtons3.appendChild(moveDownButton);
+		header.appendChild(stackedButtons3);
+		header.appendChild(stackedButtons2);
+		header.appendChild(stackedButtons1);
 
-    // create layers
-    for (var j = 0; j < currentContainer.layers.length; j++) {
-      var currentLayer = currentContainer.layers[j];
+		return header;
+	}
 
-      // layer
-      var layer = document.createElement('div');
-      layer.classList.add('layer');
-      if (currentLayer.faulty) layer.classList.add('faulty');
+	buildLayerContainer(currentContainer) {
+		// create layerContainer
+		var layerContainer = document.createElement('div');
+		layerContainer.className = 'layerContainer';
+		layerContainer.hidden = !currentContainer.expanded || !currentContainer.activated;
 
-      // search div
-      var searchDiv = document.createElement('div');
-      searchDiv.className = 'searchDiv';
+		// create layers
+		for (var j = 0; j < currentContainer.layers.length; j++) {
+			var currentLayer = currentContainer.layers[j];
 
-      // search input
-      var searchField = document.createElement('input');
-      searchField.setAttribute('list', 'suggestionList-' + currentLayer.id);
-      searchField.autocomplete = 'off';
-      searchField.type = 'text';
-      searchField.id = 'searchField-' + currentLayer.id;
-      searchField.className = 'searchField';
-      searchField.value = currentLayer.query;
+			// layer
+			var layer = document.createElement('div');
+			layer.classList.add('layer');
+			if (currentLayer.faulty) layer.classList.add('faulty');
 
-      // suggestionslist
-      var suggestionList = document.createElement('datalist');
-      suggestionList.id = 'suggestionList-' + currentLayer.id;
-      suggestionList.className = 'suggestionList';
+			// search div
+			var searchDiv = document.createElement('div');
+			searchDiv.className = 'searchDiv';
 
-      // checkbox to include all childs
-      var includeChildsCheckbox = document.createElement('div');
-      includeChildsCheckbox.className = 'includeChildsCheckbox';
-      includeChildsCheckbox.id = 'includeChildsCheckbox-' + currentLayer.id;
-      includeChildsCheckbox.innerText = Constants.strings.includeChilds;
+			// search input
+			var searchField = document.createElement('input');
+			searchField.setAttribute('list', 'suggestionList-' + currentLayer.id);
+			searchField.autocomplete = 'off';
+			searchField.type = 'text';
+			searchField.id = 'searchField-' + currentLayer.id;
+			searchField.className = 'searchField';
+			searchField.value = currentLayer.query;
 
-      // delete button
-      var removeLayerImage = document.createElement('img');
-      removeLayerImage.src = '/scripts/Filter/Assets/close.png';
-      removeLayerImage.className = 'removeLayerImage';
-      removeLayerImage.style.pointerEvents = 'none';
-      var removeLayerButton = document.createElement('button');
-      removeLayerButton.className = 'removeLayerButton';
-      removeLayerButton.appendChild(removeLayerImage);
-      removeLayerButton.container = currentContainer; // pass container as parameter of button
-      removeLayerButton.layer = currentLayer; // pass layer as parameter of button
-      removeLayerButton.filter = this.filter; // pass filter as parameter of button
-      removeLayerButton.addEventListener('click', this.filter.removeLayer, false);
+			// suggestionslist
+			var suggestionList = document.createElement('datalist');
+			suggestionList.id = 'suggestionList-' + currentLayer.id;
+			suggestionList.className = 'suggestionList';
 
-      // deactivate button
-      var deactivateLayerImage = document.createElement('img');
-      deactivateLayerImage.src = '/scripts/Filter/Assets/deactivate.png';
-      deactivateLayerImage.className = 'deactivateImage';
-      deactivateLayerImage.style.pointerEvents = 'none';
-      var deactivateLayerButton = document.createElement('button');
-      deactivateLayerButton.className = 'deactivateLayerButton';
-      deactivateLayerButton.appendChild(deactivateLayerImage);
-      deactivateLayerButton.container = currentContainer; // pass container as parameter of button
-      deactivateLayerButton.layer = currentLayer; // pass layer as parameter of button
-      deactivateLayerButton.filter = this.filter; // pass filter as parameter of button
-      deactivateLayerButton.addEventListener('click', this.filter.deactivateLayer, false);
+			// checkbox to include all childs
+			var includeChildsCheckbox = document.createElement('div');
+			includeChildsCheckbox.className = 'includeChildsCheckbox';
+			includeChildsCheckbox.id = 'includeChildsCheckbox-' + currentLayer.id;
+			includeChildsCheckbox.innerText = Constants.strings.includeChilds;
 
-      // build layerContainer
-      var stackedButtons2 = document.createElement('div');
-      var stackedButtons3 = document.createElement('div');
-      var checkboxes = document.createElement('div');
-      stackedButtons2.className = 'stackedElements';
-      stackedButtons3.className = 'stackedElements';
-      checkboxes.className = 'checkboxes';
-      checkboxes.appendChild(includeChildsCheckbox);
+			// delete button
+			var removeLayerImage = document.createElement('img');
+			removeLayerImage.src = '/scripts/Filter/Assets/close.png';
+			removeLayerImage.className = 'removeLayerImage';
+			removeLayerImage.style.pointerEvents = 'none';
+			var removeLayerButton = document.createElement('button');
+			removeLayerButton.className = 'removeLayerButton';
+			removeLayerButton.appendChild(removeLayerImage);
+			removeLayerButton.container = currentContainer; // pass container as parameter of button
+			removeLayerButton.layer = currentLayer; // pass layer as parameter of button
+			removeLayerButton.filter = this.filter; // pass filter as parameter of button
+			removeLayerButton.addEventListener('click', this.filter.removeLayer, false);
 
-      searchDiv.appendChild(searchField);
-      searchDiv.appendChild(suggestionList);
+			// deactivate button
+			var deactivateLayerImage = document.createElement('img');
+			deactivateLayerImage.src = '/scripts/Filter/Assets/deactivate.png';
+			deactivateLayerImage.className = 'deactivateImage';
+			deactivateLayerImage.style.pointerEvents = 'none';
+			var deactivateLayerButton = document.createElement('button');
+			deactivateLayerButton.className = 'deactivateLayerButton';
+			deactivateLayerButton.appendChild(deactivateLayerImage);
+			deactivateLayerButton.container = currentContainer; // pass container as parameter of button
+			deactivateLayerButton.layer = currentLayer; // pass layer as parameter of button
+			deactivateLayerButton.filter = this.filter; // pass filter as parameter of button
+			deactivateLayerButton.addEventListener('click', this.filter.deactivateLayer, false);
 
-      stackedButtons2.appendChild(searchDiv);
-      stackedButtons2.appendChild(checkboxes);
-      stackedButtons3.appendChild(removeLayerButton);
-      stackedButtons3.appendChild(deactivateLayerButton);
-      layer.appendChild(stackedButtons2);
-      layer.appendChild(stackedButtons3);
-      layerContainer.appendChild(layer);
-    }
+			// build layerContainer
+			var stackedButtons2 = document.createElement('div');
+			var stackedButtons3 = document.createElement('div');
+			var checkboxes = document.createElement('div');
+			stackedButtons2.className = 'stackedElements';
+			stackedButtons3.className = 'stackedElements';
+			checkboxes.className = 'checkboxes';
+			checkboxes.appendChild(includeChildsCheckbox);
 
-    // create div to add layer
-    var addLayer = document.createElement('div');
-    if (currentContainer.layers.length == 0 && this.filter.containers.length > 1)
-      addLayer.classList.add('actionLayer', 'faulty');
-    else addLayer.classList.add('actionLayer');
-    addLayer.container = currentContainer; // pass container as parameter of button
-    addLayer.filter = this.filter; // pass filter as parameter of button
-    addLayer.addEventListener('click', this.filter.addLayer, false);
-    var addLayerIcon = document.createElement('img');
-    addLayerIcon.src = '/scripts/Filter/Assets/addlayer.png';
-    addLayerIcon.style.pointerEvents = 'none';
-    var addLayerText = document.createElement('span');
-    addLayerText.innerText = Constants.strings.addLayer;
-    addLayerText.style.pointerEvents = 'none';
-    addLayer.appendChild(addLayerIcon);
-    addLayer.appendChild(addLayerText);
-    layerContainer.appendChild(addLayer);
+			searchDiv.appendChild(searchField);
+			searchDiv.appendChild(suggestionList);
 
-    return layerContainer;
-  }
+			stackedButtons2.appendChild(searchDiv);
+			stackedButtons2.appendChild(checkboxes);
+			stackedButtons3.appendChild(removeLayerButton);
+			stackedButtons3.appendChild(deactivateLayerButton);
+			layer.appendChild(stackedButtons2);
+			layer.appendChild(stackedButtons3);
+			layerContainer.appendChild(layer);
+		}
 
-  buildContainer(currentContainer) {
-    var container = document.createElement('div');
-    container.classList.add('container');
-    for (let layer of currentContainer.layers) {
-      if (layer.faulty) {
-        container.classList.add('faulty');
-        break;
-      }
-    }
+		// create div to add layer
+		var addLayer = document.createElement('div');
+		if (currentContainer.layers.length == 0 && this.filter.containers.length > 1)
+			addLayer.classList.add('actionLayer', 'faulty');
+		else addLayer.classList.add('actionLayer');
+		addLayer.container = currentContainer; // pass container as parameter of button
+		addLayer.filter = this.filter; // pass filter as parameter of button
+		addLayer.addEventListener('click', this.filter.addLayer, false);
+		var addLayerIcon = document.createElement('img');
+		addLayerIcon.src = '/scripts/Filter/Assets/addlayer.png';
+		addLayerIcon.style.pointerEvents = 'none';
+		var addLayerText = document.createElement('span');
+		addLayerText.innerText = Constants.strings.addLayer;
+		addLayerText.style.pointerEvents = 'none';
+		addLayer.appendChild(addLayerIcon);
+		addLayer.appendChild(addLayerText);
+		layerContainer.appendChild(addLayer);
 
-    return container;
-  }
+		return layerContainer;
+	}
 
-  setContainerHeaderProperties(containers) {
-    if (containers.length > 0) {
-      let transformations = Object.keys(Constants.transformations).map(
-        val => Constants.transformations[val]
-      );
-      $('.transformationSelect').jqxDropDownList({
-        theme: 'metro',
-        source: transformations,
-        height: '15px'
-      });
-      $('.moveButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
-      $('.deactivateButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
-      $('.removeContainerButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
+	buildContainer(currentContainer) {
+		var container = document.createElement('div');
+		container.classList.add('container');
+		for (let layer of currentContainer.layers) {
+			if (layer.faulty) {
+				container.classList.add('faulty');
+				break;
+			}
+		}
 
-      // style layer elements
-      let c = 0;
-      containers.forEach(container => (c += container.layers.length));
-      if (c > 0) {
-        $('.removeLayerButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
-        $('.searchField').jqxInput({ theme: 'metro', height: '15px', placeHolder: '' });
-        $('.deactivateLayerButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
-      }
-    }
-  }
+		return container;
+	}
 
-  setContainerProperties(c) {
-    var filterAlias = this.filter;
+	setContainerHeaderProperties(containers) {
+		if (containers.length > 0) {
+			let transformations = Object.keys(Constants.transformations).map(
+				val => Constants.transformations[val]
+			);
+			$('.transformationSelect').jqxDropDownList({
+				theme: 'metro',
+				source: transformations,
+				height: '15px'
+			});
+			$('.moveButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
+			$('.deactivateButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
+			$('.removeContainerButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
 
-    // disable elements
-    $('#transformationSelect-' + c.id).jqxDropDownList({ disabled: !c.activated });
-    $('#invertCheckbox-' + c.id).jqxCheckBox({ disabled: !c.activated });
-    $('#relationsCheckbox-' + c.id).jqxCheckBox({ disabled: !c.activated });
+			// style layer elements
+			let c = 0;
+			containers.forEach(container => (c += container.layers.length));
+			if (c > 0) {
+				$('.removeLayerButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
+				$('.searchField').jqxInput({ theme: 'metro', height: '15px', placeHolder: '' });
+				$('.deactivateLayerButton').jqxButton({ theme: 'metro', height: '15px', width: '15px' });
+			}
+		}
+	}
 
-    // set select and onSelect function
-    $('#transformationSelect-' + c.id).jqxDropDownList({ selectedIndex: c.transformation });
-    $('#transformationSelect-' + c.id).on('select', event => {
-      var item = $('#transformationSelect-' + c.id).jqxDropDownList('getItem', event.args.index);
-      c.transformation = item.index;
-      event.target.filter = filterAlias;
-      filterAlias.apply(event);
-    });
+	setContainerProperties(c) {
+		var filterAlias = this.filter;
 
-    // set invert checkbox and onChange function
-    $('#invertCheckbox-' + c.id).jqxCheckBox({
-      theme: 'metro',
-      height: '15px',
-      checked: c.inverted
-    });
-    $('#invertCheckbox-' + c.id).on('change', event => {
-      // console.log("invertCB " + c.id + " is now: " + (event.args.checked ? "inverted" : "not inverted"));
-      c.inverted = event.args.checked;
-      event.target.filter = filterAlias;
-      filterAlias.apply(event);
-    });
+		// disable elements
+		$('#transformationSelect-' + c.id).jqxDropDownList({ disabled: !c.activated });
+		$('#invertCheckbox-' + c.id).jqxCheckBox({ disabled: !c.activated });
+		$('#relationsCheckbox-' + c.id).jqxCheckBox({ disabled: !c.activated });
 
-    // set relations checkbox and onChange function
-    $('#relationsCheckbox-' + c.id).jqxCheckBox({
-      theme: 'metro',
-      height: '15px',
-      checked: c.relations
-    });
-    $('#relationsCheckbox-' + c.id).on('change', event => {
-      // console.log("relationsCB " + c.id + " is now: " + (event.args.checked ? "active" : "not active"));
-      c.relations = event.args.checked;
-      event.target.filter = filterAlias;
-      filterAlias.apply(event);
-    });
+		// set select and onSelect function
+		$('#transformationSelect-' + c.id).jqxDropDownList({ selectedIndex: c.transformation });
+		$('#transformationSelect-' + c.id).on('select', event => {
+			var item = $('#transformationSelect-' + c.id).jqxDropDownList('getItem', event.args.index);
+			c.transformation = item.index;
+			event.target.filter = filterAlias;
+			filterAlias.apply(event);
+		});
 
-    for (let l of c.layers) {
-      // disable elements
-      $('#includeChildsCheckbox-' + l.id).jqxCheckBox({ disabled: !l.activated });
+		// set invert checkbox and onChange function
+		$('#invertCheckbox-' + c.id).jqxCheckBox({
+			theme: 'metro',
+			height: '15px',
+			checked: c.inverted
+		});
+		$('#invertCheckbox-' + c.id).on('change', event => {
+			// console.log("invertCB " + c.id + " is now: " + (event.args.checked ? "inverted" : "not inverted"));
+			c.inverted = event.args.checked;
+			event.target.filter = filterAlias;
+			filterAlias.apply(event);
+		});
 
-      // set includeChilds checkbox and onChange function
-      $('#includeChildsCheckbox-' + l.id).jqxCheckBox({
-        theme: 'metro',
-        height: '15px',
-        checked: l.includeChilds
-      });
-      $('#includeChildsCheckbox-' + l.id).on('change', event => {
-        l.includeChilds = event.args.checked;
-        event.target.filter = filterAlias;
-        filterAlias.apply(event);
-      });
-    }
-  }
+		// set relations checkbox and onChange function
+		$('#relationsCheckbox-' + c.id).jqxCheckBox({
+			theme: 'metro',
+			height: '15px',
+			checked: c.relations
+		});
+		$('#relationsCheckbox-' + c.id).on('change', event => {
+			// console.log("relationsCB " + c.id + " is now: " + (event.args.checked ? "active" : "not active"));
+			c.relations = event.args.checked;
+			event.target.filter = filterAlias;
+			filterAlias.apply(event);
+		});
+
+		for (let l of c.layers) {
+			// disable elements
+			$('#includeChildsCheckbox-' + l.id).jqxCheckBox({ disabled: !l.activated });
+
+			// set includeChilds checkbox and onChange function
+			$('#includeChildsCheckbox-' + l.id).jqxCheckBox({
+				theme: 'metro',
+				height: '15px',
+				checked: l.includeChilds
+			});
+			$('#includeChildsCheckbox-' + l.id).on('change', event => {
+				l.includeChilds = event.args.checked;
+				event.target.filter = filterAlias;
+				filterAlias.apply(event);
+			});
+		}
+	}
 }

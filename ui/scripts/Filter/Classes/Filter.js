@@ -225,6 +225,56 @@ class Filter {
 		filter.redraw();
 	}
 
+	zoom(event) {
+		document.getElementById('x3dElement').runtime.showAll('negZ');
+	}
+
+	loadConfigurationFile(event) {
+		document.getElementById('loadFileInput').click();
+	}
+
+	saveConfigurationFile(event) {
+		let containers = event.target.filter.containers;
+		let config = { containers: [] };
+
+		containers.forEach(c => {
+			// map layers of container c
+			let configContainerLayers = [];
+			c.layers.forEach(l => {
+				let configContainerLayer = {
+					activated: l.activated,
+					query: l.query,
+					includeChilds: l.includeChilds
+				};
+				configContainerLayers.push(configContainerLayer);
+			});
+
+			// map container c
+			let configContainer = {
+				type: c.transformation,
+				activated: c.activated,
+				relations: c.relations,
+				inverted: c.inverted,
+				layers: configContainerLayers
+			};
+
+			// add mapped container c to config
+			config.containers.push(configContainer);
+		});
+
+		// set data for file
+		let text = JSON.stringify(config);
+		let type = 'text/plain';
+		let name = 'config.json';
+
+		// save the file
+		var a = document.createElement('a');
+		var file = new Blob([text], { type: type });
+		a.href = URL.createObjectURL(file);
+		a.download = name;
+		a.click();
+	}
+
 	/*
    * ==================================================================================================================
    * filtering logic
