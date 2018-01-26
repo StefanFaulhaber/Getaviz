@@ -21,39 +21,36 @@
 	margin-bottom: 5px;
 	width: 100%;
 
-	padding: 0 5px;
+	padding: 0 0 0 5px;
 	color: white;
 
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-items: center;
 	align-content: center;
 }
 
 .toolbar > span {
-	width: calc((100% - 25px) / 4);
+	width: auto;
+	flex-grow: 1;
 	background-color: white;
 	border: 1px solid #808080;
 	color: #808080;
-	margin: 0 10px 5px 0;
+	margin: 0 5px 5px 0;
 	padding: 5px 10px;
 	cursor: pointer;
 	text-align: center;
 }
 
-.toolbar > span:last-child {
-	margin-right: 0;
-}
-
 /* note when filter is empty */
 
 .note {
-  margin: 5px 5px 0 5px;
-  padding: 5px;
-  border: solid 1px #aaaaaa;
-  color: #808080;
+	margin: 5px 5px 0 5px;
+	padding: 5px;
+	border: solid 1px #aaaaaa;
+	color: #808080;
 }
 
 /* div for actions at the bottom */
@@ -222,7 +219,7 @@
 
 .invertCheckbox > div:first-child,
 .relationsCheckbox > div:first-child {
-  margin: 0 5px 0 0;
+	margin: 0 5px 0 0;
 }
 
 .checkboxes {
@@ -249,7 +246,7 @@
 
 /* jqx dropdownlist header */
 .jqx-dropdownlist-content {
-  width: auto !important;
+	width: auto !important;
 }
 
 /* jqx dropdownlist head when expanded */

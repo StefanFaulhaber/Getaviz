@@ -7,10 +7,6 @@
 - Server auf localhost starten (z.B. XAMPP, MAMP, ...)
 - http://localhost:8888/filter.html aufrufen
 
-## TODO
-
-- Reset, zoom
-
 ## Notizen
 
 - Modelle kompilieren via: 
@@ -18,6 +14,23 @@
   /Applications/Instant\ Player.app/Contents/MacOS/aopt -i model.x3d -F Scene:"cacheopt(true),idmap(multiPart)" -V -x multiPart.x3d
 - Model.js: verwaltet entities
 - CanvasManipulator.js: implementiert Funktionen zur Transformation von Glyphen
+
+## TODO
+
+- Manual
+
+## Ablauf
+
+### Januar
+
+- Features
+- Fragebogen
+- Tutorial als Manual
+
+### Februar
+
+- Testdurchlauf
+- Evaluation durchführen
 
 ## Evaluation
 
@@ -60,16 +73,3 @@
 
   - Setzen Sie die Filterkonfiguration zurück.
   - Finden Sie heraus, wieviele Funktionen in der Visualisierung existieren.
-
-### Ablauf
-
-#### JANUAR
-
-- Tutorial als Manual
-- Features
-- Fragebogen
-
-#### FEBRUAR
-
-- Testdurchlauf
-- Evaluation durchführen

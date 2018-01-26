@@ -28,13 +28,13 @@ class DOMHelper {
 
 		// reset span
 		var resetText = document.createElement('span');
-		resetText.innerText = Constants.strings.reset;
+		resetText.innerText = devMode ? Constants.strings.devReset : Constants.strings.reset;
 		resetText.filter = this.filter;
 		resetText.addEventListener('click', this.filter.reset, false);
 
 		// zoom span
 		var zoomText = document.createElement('span');
-		zoomText.innerText = Constants.strings.zoom;
+		zoomText.innerText = devMode ? Constants.strings.devZoom : Constants.strings.zoom;
 		zoomText.filter = this.filter;
 		zoomText.addEventListener('click', this.filter.zoom, false);
 
@@ -68,8 +68,8 @@ class DOMHelper {
 		toolbarDiv.className = 'toolbar';
 		toolbarDiv.appendChild(resetText);
 		toolbarDiv.appendChild(zoomText);
-		toolbarDiv.appendChild(loadText);
-		toolbarDiv.appendChild(saveText);
+		if (devMode) toolbarDiv.appendChild(loadText);
+		if (devMode) toolbarDiv.appendChild(saveText);
 		if (devMode) toolbarDiv.appendChild(applyText);
 		if (devMode) toolbarDiv.appendChild(logText);
 

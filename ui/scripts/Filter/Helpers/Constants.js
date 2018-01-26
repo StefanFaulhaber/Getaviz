@@ -8,12 +8,14 @@ let Constants = {
 		connected: 'connected'
 	},
 	strings: {
-		zoom: 'zoom',
-		reset: 'reset',
+		zoom: 'reset view',
+		reset: 'reset configuration',
 		load: 'load',
 		save: 'save',
 		apply: 'apply',
 		log: 'log',
+		devZoom: 'zoom',
+		devReset: 'reset',
 		relations: 'relations',
 		invert: 'invert',
 		includeChilds: 'include children',
