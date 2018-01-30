@@ -1,56 +1,73 @@
-# Getaviz UI: Filter Dokumentation
+# Getaviz Filter: User Guide
 
 
 ## Überblick
 
-Kurzer Einleitungstext: 
-- Getaviz
-- UI
-- Filter Einordnung
-- UI Screenshot mit Grobaufteilung (1)
-- ![Screenshot Überblick](img/1.png "Screenshot Überblick")
+> Getaviz is a toolset for designing, generating, and exploring software visualizations in 2D, 3D, and virtual reality (VR), supporting structural, behavioral and evolutional visualizations. ([Getaviz on Github](https://github.com/StefanFaulhaber/Getaviz))
 
+Das User Interface von Getaviz zum Erkunden von Visualisierungen läuft im Browser. Es wird stetig weiterentwickelt, um die Benutzererfahrung zu verbessern. Im Zuge meiner Masterarbeit habe ich einen Filter in Form eines Plugins für das User Interface entwickelt. Dieser User Guide ist eine kurze Einführung in die Funktionsweise dieses Filters.
+
+![Screenshot Überblick](img/1.png "Screenshot Überblick")  
+User Interface mit Filter (links) und Visualisierung (rechts)
 
 ## Filter
 
-- kurzer Einleitungstext
+Der Filter hat die Hauptfunktion, komplexe Visualisierungen verständlicher zu machen. Dazu können beispielsweise Teile der Visualisierung ausgeblendet werden oder Beziehungen zwischen Glyphen der Visualisierung eingeblendet werden.
 
 ### User Interface
 
-- Allgemeines (2)
-- ![Screenshot Filter UI](img/2.png "Screenshot Filter UI")
+Nach jeder Änderung der Filterkonfiguration wird der Filter automatisch angewendet. Die Startkonfiguration blendet automatisch alle Glyphen der Visualisierung ein und repräsentiert damit eine ungefilterte Visualisierung.
+
+![Screenshot Filter UI](img/2.png "Screenshot Filter UI")  
+User Interface des Filters
 
 #### Toolbar
 
-- Erklärung der Funktionen (3)
-- ![Screenshot Toolbar](img/3.png "Screenshot Toolbar")
+Am oberen Rand des Filters befindet sich die Toolbar, die zwei Aktionen zum Zurücksetzen beinhaltet. Während `reset configuration` die Konfiguration auf den Standard zurücksetzt, setzt `reset view` den Zoom und die Orientierung der Visualisierung zurück.
+
+![Screenshot Toolbar](img/3.png "Screenshot Toolbar")  
+Toolbar
 
 #### Container
 
-- UI Screenshot mit Erklärung (4)
-- ![Screenshot Container](img/4.png "Screenshot Container")
+Ein Container bildet die Einheit aus einer Transformation und den Ebenen, die Glyphen selektieren. Ein Container kann beliebig viele Ebenen beinhalten und es können beliebig viele Container über `add new container` hinzugefügt werden. Der Filter wird dabei von oben nach unten ausgewertet, das heißt der oberste Container wird zuerst angewendet, bevor  alle weiteren angewendet werden.
 
-#### Layer
+Deaktivierte Container werden dabei übersprungen (`IO` Button) und ungenutzte Container können gelöscht werden (`X` Button).
 
-- UI Screenshot mit Erklärung (5)
-- ![Screenshot Layer](img/5.png "Screenshot Layer")
+Über die Pfeile in der linken oberen Ecke des Containers kann seine Position geändert werden. 
 
+![Screenshot Container](img/4.png "Screenshot Container")  
+Containerbereich
 
-### Auswahl
+#### Ebene
 
-- Allgemeines
+Eine Ebene enthält ein Query-Feld für die Eingabe eines Fully Qualified Names (FQN), der einen Glyphen bezeichnet. Weiterhin kann über `include children` angegeben werden, ob die Glyph mit allen Kind-Elementen selektiert werden soll (sinnvoll für Pakete und Klassen). Wie ein Container kann auch eine Ebene deaktiviert (`IO`) oder gelöscht (`X`) werden.
+
+![Screenshot Layer](img/5.png "Screenshot Layer")  
+Ebene eines Containers
+
+### Selektion
+
+Jeder Container selektiert bestimmte Glyphen und wendet seine Transformation auf diese Selektion an. Daher ist es von Bedeutung, dass die Selektion möglichst präzise erstellt werden kann.
 
 #### Queries
 
-- Screenshot mit Beispiel & Erklärung (6)
-- ![Screenshot Query](img/6.png "Screenshot Query")
+Um die Selektion von Glyphen zu erleichtern, enthält der Filter eine Autovervollständigung, wie man sie aus Suchmaschinen kennt. Die Autovervollständigung zieht vorherige Container mit in Betracht, indem sie ausgeblendete Glyphen nicht mehr vorschlägt. So können Tippfehler vermieden und Glyphen schneller selektiert werden.
+
+Durch die Vorschläge kann mit den Pfeiltasten der Tastatur navigiert werden. Mit Enter wird der fokussierte Vorschlag als Query eingetragen.
+
+![Screenshot Query](img/6.png "Screenshot Query")
+Query mit Autovervollständigung
 
 #### Auswahlmanipulatoren
 
-- Screenshot mit Beispiel & Erklärung (7)
-- ![Screenshot Relationen](img/7.png "Screenshot Relationen")
-- Screenshot mit Beispiel & Erklärung (8)
-- ![Screenshot Invertieren](img/8.png "Screenshot Invertieren")
+Um einer Containerselektion weitere Eigenschaften zu verleihen, kann diese mit den Auswahlmanipulatoren `relations` und `invert` beeinflusst werden.
+
+![Screenshot Relationen](img/7.png "Screenshot Relationen")  
+`relations`: selektiert zusätzlich alle Relationen (istSubtyp, istSupertyp, wirdAufgerufen, ruftAuf, ...)
+
+![Screenshot Invertieren](img/8.png "Screenshot Invertieren")  
+`invert`: selektiert alle Glyphen der Visualisierung, außer der Gesamtauswahl des Containers
 
 ### Transformationen
 
