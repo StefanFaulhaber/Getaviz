@@ -226,6 +226,26 @@ class Filter {
 	}
 
 	zoom(event) {
+		let filter = event.target.filter;
+		let runtime = document.getElementById('x3dElement').runtime;
+		let viewarea = runtime.canvas.doc._viewarea;
+		let viewpoint = viewarea._scene.getViewpoint();
+		let globalCenter = { x: 0, y: 0, z: 0 };
+
+		// get visible entities
+		let entities = filter.visualizedEntities.filter(entity => !entity.filtered);
+
+		// sum up the center coordinates of the entities
+		entities.forEach(entity => {
+			let center = canvasManipulator.getCenterOfEntity(entity);
+			Object.getOwnPropertyNames(globalCenter).forEach(dim => (globalCenter[dim] += center[dim]));
+		});
+
+		// divide through number of entities to get average center
+		Object.getOwnPropertyNames(globalCenter).forEach(dim => (globalCenter[dim] /= entities.length));
+
+		// set center of rotation to average center and zoom to fit all entities
+		viewpoint.setCenterOfRotation(globalCenter);
 		document.getElementById('x3dElement').runtime.showAll('negZ');
 	}
 
