@@ -1,6 +1,5 @@
 # Getaviz Filter: User Guide
 
-
 ## Überblick
 
 > Getaviz is a toolset for designing, generating, and exploring software visualizations in 2D, 3D, and virtual reality (VR), supporting structural, behavioral and evolutional visualizations. ([Getaviz on Github](https://github.com/StefanFaulhaber/Getaviz))
@@ -43,7 +42,7 @@ Containerbereich
 
 Eine Ebene enthält ein Query-Feld für die Eingabe eines Fully Qualified Names (FQN), der einen Glyphen bezeichnet. Weiterhin kann über `include children` angegeben werden, ob die Glyph mit allen Kind-Elementen selektiert werden soll (sinnvoll für Pakete und Klassen). Wie ein Container kann auch eine Ebene deaktiviert (`IO`) oder gelöscht (`X`) werden.
 
-![Screenshot Layer](img/5.png "Screenshot Layer")  
+![Screenshot Ebene](img/5.png "Screenshot Ebene")  
 Ebene eines Containers
 
 ### Selektion
@@ -56,12 +55,14 @@ Um die Selektion von Glyphen zu erleichtern, enthält der Filter eine Autovervol
 
 Durch die Vorschläge kann mit den Pfeiltasten der Tastatur navigiert werden. Mit Enter wird der fokussierte Vorschlag als Query eingetragen.
 
+Eine leere Query steht dabei für die Selektion aller auswählbaren Glyphen. Ein Beispiel dafür ist die Standardkonfiguration: Ein Container mit der Transformation `visible` der eine Ebene enthält deren Query leer ist. Damit werden alle Glyphen der Visualisierung selektiert und sichtbar gemacht.
+
 ![Screenshot Query](img/6.png "Screenshot Query")
 Query mit Autovervollständigung
 
-#### Auswahlmanipulatoren
+#### Selektionsmanipulatoren
 
-Um einer Containerselektion weitere Eigenschaften zu verleihen, kann diese mit den Auswahlmanipulatoren `relations` und `invert` beeinflusst werden.
+Um einer Containerselektion weitere Eigenschaften zu verleihen, kann diese mit den Selektionsmanipulatoren `relations` und `invert` beeinflusst werden.
 
 ![Screenshot Relationen](img/7.png "Screenshot Relationen")  
 `relations`: selektiert zusätzlich alle Relationen (istSubtyp, istSupertyp, wirdAufgerufen, ruftAuf, ...)
@@ -71,30 +72,64 @@ Um einer Containerselektion weitere Eigenschaften zu verleihen, kann diese mit d
 
 ### Transformationen
 
-- Allgemeines
+Eine Transformation bestimmt, wie der Filter mit der Selektion eines Containers umgeht.  
+
+Liste aller Transformationen:
+- `visible`
+- `invisible`
+- `transparent`
+- `opaque`
+- `selected`
+- `connected`
 
 #### Sichtbarkeit
 
-- Screenshot mit Beispiel & Erklärung (9)
-- ![Screenshot visible](img/9.png "Screenshot visible")
+Die Transformationen `visible` und `invisible` können Glyphen anzeigen oder ausblenden.
+
+![Screenshot visible](img/9.png "Screenshot visible")  
 
 #### Transparenz
 
-- Screenshot mit Beispiel & Erklärung (10)
-- ![Screenshot transparent](img/10.png "Screenshot transparent")
+Die Transformationen `transparent` und `opaque` können Glyphen respektive durchsichtig oder undurchsichtig darstellen.
+
+![Screenshot transparent](img/10.png "Screenshot transparent")  
 
 #### Selektion
 
-- Screenshot mit Beispiel & Erklärung (11)
-- ![Screenshot selected](img/11.png "Screenshot selected")
+Die Transformation `selected` kann Glyphen auswählen.
+
+![Screenshot selected](img/11.png "Screenshot selected")  
 
 #### Konnektivität
 
-- Screenshot mit Beispiel & Erklärung (12)
-- ![Screenshot connected](img/12.png "Screenshot connected")
+Die Transformation `connected` verbindet alle Relationen innerhalb der Selektion mit Konnektoren und färbt die an den Relationen teilhabenden Glyphen ein. Diese Transformation lässt sich kombinieren mit der Selektionsmanipulation `relations`.
 
+![Screenshot connected](img/12.png "Screenshot connected")  
+Darstellung der Klassen `InCallScreen` und `CallCard` mit gleichzeitiger Anzeige aller Relationen zwischen ihnen
+
+
+## Typischer Workflow
+
+### Beispiel 1
+
+Text
+
+### Beispiel 2
+
+Text
+
+
+## Anhang
 
 ### Entwicklermodus
 
-- devMode Erklärung mit Screenshot (13)
-- ![Screenshot devMode](img/13.png "Screenshot devMode")
+Der Entwicklermodus bietet noch weitere Funktionen:
+- Laden von Konfigurationsdateien
+- Speichern von Konfigurationen
+- manuelles Anwenden des Filters
+- Loggen des Konfigurationsobjekts zur Fehlerbehebung
+
+Der Entwicklermodus kann im Setup über die Variable `devMode` eingeschalten werden. Außerdem kann dort auch die Anfangskonfiguration des Filters über die Variable `configuration` geändert werden. Die Konfigurationsdatei muss sich dazu im Ordner `/scripts/Filter/Configurations/` befinden.
+
+![Screenshot devMode](img/13.png "Screenshot devMode")  
+Toolbar des Filters im Entwicklermodus
