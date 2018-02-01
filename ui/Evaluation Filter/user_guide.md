@@ -1,5 +1,26 @@
 # Getaviz Filter: User Guide
 
+## Inhalt
+
+1. Überblick
+2. Filter  
+  - User Interface
+    - Toolbar
+    - Container
+    - Ebene
+  - Selektion
+    - Queries
+    - Selektionsmanipulatoren
+  - Transformationen
+    - Sichtbarkeit
+    - Transparenz
+    - Auswahl
+    - Konnektivität
+3. Typischer Wokrflow
+4. Anhang
+  - Entwicklermodus
+
+
 ## Überblick
 
 > Getaviz is a toolset for designing, generating, and exploring software visualizations in 2D, 3D, and virtual reality (VR), supporting structural, behavioral and evolutional visualizations. ([Getaviz on Github](https://github.com/StefanFaulhaber/Getaviz))
@@ -94,7 +115,7 @@ Die Transformationen `transparent` und `opaque` können Glyphen respektive durch
 
 ![Screenshot transparent](img/10.png "Screenshot transparent")  
 
-#### Selektion
+#### Auswahl
 
 Die Transformation `selected` kann Glyphen auswählen.
 
@@ -110,14 +131,20 @@ Darstellung der Klassen `InCallScreen` und `CallCard` mit gleichzeitiger Anzeige
 
 ## Typischer Workflow
 
-### Beispiel 1
+1. Anzeigen der relevanten Glyphen
+    - Ausschluss von Glyphen mit der Transformation `invisible`
+    - Einblenden von Glyphen mit der Transformation `visible`
+    - eventuell Relationen beachten
 
-Text
+2. Glyphen priorisieren
+    - Glyphen mit der Transformation `transparent` in den Hintergrund treten lassen
+    - Glyphen mit der Transformation `opaque` herausstellen
 
-### Beispiel 2
+3. Relationen anzeigen
+    - Glyphenrelationen mit der Transformation `connected` anzeigen
 
-Text
-
+4. Besonderheiten kennzeichnen
+    - Glyphen mit der Transformation `selected` markieren
 
 ## Anhang
 
