@@ -7,6 +7,14 @@
 - Server auf localhost starten (z.B. XAMPP, MAMP, ...)
 - http://localhost:8888/filter.html aufrufen
 
+## TODO
+
+- Tutorial und Docs verschmelzen (ExperimentalController)
+- 2 neue Fragen hinzufügen
+- Ablauf formulieren (+Google Fragebogen)
+- ScreenCast, Audiorecording
+- RelationsController nutzen (David fragen)
+
 ## Notizen
 
 - Modelle kompilieren via: 

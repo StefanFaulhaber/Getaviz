@@ -1,4 +1,4 @@
-# Evaluation
+# Evaluation "RedPill"
 
 1. Container & Ebenen unterscheiden
 
@@ -45,7 +45,7 @@
 
 ---
 
-7. unmögliche Endlosaufgabe
+7. Probieraufgabe
 
   - Setzen Sie die Filterkonfiguration zurück.
-  - Finden Sie heraus, wieviele Funktionen in der Visualisierung existieren.
+  - Zeigen sie zwei Klassen an, und nur von einer die Relationen.

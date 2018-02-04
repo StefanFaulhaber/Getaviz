@@ -1,0 +1,30 @@
+{
+	"containers": [
+		{
+			"activated": true,
+			"type": 0,
+			"relations": false,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "",
+					"includeChilds": false
+				}
+			]
+		},
+		{
+			"activated": true,
+			"type": 5,
+			"relations": true,
+			"inverted": false,
+			"layers": [
+				{
+					"activated": true,
+					"query": "com.android.phone.InCallScreen",
+					"includeChilds": true
+				}
+			]
+		}
+	]
+}
