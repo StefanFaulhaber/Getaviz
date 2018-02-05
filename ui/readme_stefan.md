@@ -11,8 +11,7 @@
 
 - Tutorial und Docs verschmelzen (ExperimentalController)
 - 2 neue Fragen hinzufügen
-- Ablauf formulieren (+Google Fragebogen)
-- ScreenCast, Audiorecording
+- Fragebögen fertigstellen
 - RelationsController nutzen (David fragen)
 
 ## Notizen

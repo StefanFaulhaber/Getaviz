@@ -1,5 +1,18 @@
 # Evaluation "RedPill"
 
+## Ablauf
+
+1. Begrüßung
+2. Allgemeine Personenangaben (Fragebogen 1)
+3. Erläuterung des Evaluationsablaufs
+4. Einführung Softwarevisualisierung (mündlich)
+5. Vorstellung des Testsetups
+6. Aufgaben (Teil I - Fragebogen 2)
+7. Aufgaben (Teil II - Fragebogen 3)
+8. Feedback (Fragebogen 4)
+
+## Aufgaben
+
 1. Container & Ebenen unterscheiden
 
   - Fügen Sie dem ersten Container zwei Ebenen hinzu.
@@ -45,7 +58,19 @@
 
 ---
 
-7. Probieraufgabe
+7. Typisches Problem lösen (3)
+
+  - Text
+
+---
+
+8. Typisches Problem lösen (4)
+
+  - Text
+
+---
+
+9. Probieraufgabe
 
   - Setzen Sie die Filterkonfiguration zurück.
   - Zeigen sie zwei Klassen an, und nur von einer die Relationen.
