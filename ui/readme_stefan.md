@@ -9,9 +9,8 @@
 
 ## TODO
 
-- 1 neue Frage erstellen
-- Lösungskonfigurationen fertigstellen
 - suchfeld bug: tippen wird unterbrochen
+- Lösungskonfigurationen fertigstellen
 - Fragebögen fertigstellen
 
 - RelationsController nutzen (David fragen)

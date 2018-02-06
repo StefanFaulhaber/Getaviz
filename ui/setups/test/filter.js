@@ -10,7 +10,7 @@
 		{
 			name: 'filterController',
 			devMode: false,
-			configuration: 'Aufgabe5.json'
+			configuration: 'default.json'
 		},
 		{
 			name: 'experimentController',
@@ -114,7 +114,12 @@
 				},
 				{
 					number: 80,
-					text: ['Aufgabe 8', '', '', 'TODO']
+					text: [
+						'Aufgabe 8',
+						'',
+						'',
+						'Markieren Sie alle Elemente der Klasse "com.android.phone.CallNotifier" als selected, die in Relation zur Klasse "com.android.phone.PhoneUtils" stehen.'
+					]
 				},
 				{
 					number: 90,
