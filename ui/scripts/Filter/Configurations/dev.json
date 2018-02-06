@@ -15,7 +15,7 @@
 		},
 		{
 			"activated": true,
-			"type": 5,
+			"type": 1,
 			"relations": true,
 			"inverted": false,
 			"layers": [

@@ -9,9 +9,11 @@
 
 ## TODO
 
-- Tutorial und Docs verschmelzen (ExperimentalController)
-- 2 neue Fragen hinzufügen
+- 1 neue Frage erstellen
+- Lösungskonfigurationen fertigstellen
+- suchfeld bug: tippen wird unterbrochen
 - Fragebögen fertigstellen
+
 - RelationsController nutzen (David fragen)
 
 ## Notizen
