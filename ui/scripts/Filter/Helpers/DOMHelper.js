@@ -75,7 +75,7 @@ class DOMHelper {
 
 		// div to add a container
 		var plus = document.createElement('img');
-		plus.src = '/scripts/Filter/Assets/addcontainer.png';
+		plus.src = './scripts/Filter/Assets/addcontainer.png';
 		plus.style.pointerEvents = 'none';
 		var text = document.createElement('span');
 		text.innerText = Constants.strings.addContainer;
@@ -114,7 +114,7 @@ class DOMHelper {
 
 		// remove container button
 		var removeImage = document.createElement('img');
-		removeImage.src = '/scripts/Filter/Assets/close.png';
+		removeImage.src = './scripts/Filter/Assets/close.png';
 		removeImage.className = 'removeImage';
 		removeImage.style.pointerEvents = 'none';
 		var removeContainerButton = document.createElement('button');
@@ -126,7 +126,7 @@ class DOMHelper {
 
 		// deactivate button
 		var deactivateImage = document.createElement('img');
-		deactivateImage.src = '/scripts/Filter/Assets/deactivate.png';
+		deactivateImage.src = './scripts/Filter/Assets/deactivate.png';
 		deactivateImage.className = 'deactivateImage';
 		deactivateImage.style.pointerEvents = 'none';
 		var deactivateButton = document.createElement('button');
@@ -165,7 +165,7 @@ class DOMHelper {
 
 		// move up button
 		var moveUpImage = document.createElement('img');
-		moveUpImage.src = '/scripts/Filter/Assets/containerup.png';
+		moveUpImage.src = './scripts/Filter/Assets/containerup.png';
 		moveUpImage.className = 'moveUpImage';
 		moveUpImage.style.pointerEvents = 'none';
 		var moveUpButton = document.createElement('button');
@@ -178,7 +178,7 @@ class DOMHelper {
 
 		// move down button
 		var moveDownImage = document.createElement('img');
-		moveDownImage.src = '/scripts/Filter/Assets/containerdown.png';
+		moveDownImage.src = './scripts/Filter/Assets/containerdown.png';
 		moveDownImage.className = 'moveDownImage';
 		moveDownImage.style.pointerEvents = 'none';
 		var moveDownButton = document.createElement('div');
@@ -252,7 +252,7 @@ class DOMHelper {
 
 			// delete button
 			var removeLayerImage = document.createElement('img');
-			removeLayerImage.src = '/scripts/Filter/Assets/close.png';
+			removeLayerImage.src = './scripts/Filter/Assets/close.png';
 			removeLayerImage.className = 'removeLayerImage';
 			removeLayerImage.style.pointerEvents = 'none';
 			var removeLayerButton = document.createElement('button');
@@ -265,7 +265,7 @@ class DOMHelper {
 
 			// deactivate button
 			var deactivateLayerImage = document.createElement('img');
-			deactivateLayerImage.src = '/scripts/Filter/Assets/deactivate.png';
+			deactivateLayerImage.src = './scripts/Filter/Assets/deactivate.png';
 			deactivateLayerImage.className = 'deactivateImage';
 			deactivateLayerImage.style.pointerEvents = 'none';
 			var deactivateLayerButton = document.createElement('button');
@@ -306,7 +306,7 @@ class DOMHelper {
 		addLayer.filter = this.filter; // pass filter as parameter of button
 		addLayer.addEventListener('click', this.filter.addLayer, false);
 		var addLayerIcon = document.createElement('img');
-		addLayerIcon.src = '/scripts/Filter/Assets/addlayer.png';
+		addLayerIcon.src = './scripts/Filter/Assets/addlayer.png';
 		addLayerIcon.style.pointerEvents = 'none';
 		var addLayerText = document.createElement('span');
 		addLayerText.innerText = Constants.strings.addLayer;
