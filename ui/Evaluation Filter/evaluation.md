@@ -1,13 +1,20 @@
 # Evaluation "RedPill"
 
+## Formulare
+- https://goo.gl/forms/OSoi9V8t3sqXfISi1
+- https://goo.gl/forms/NDbHas7zQy84Zk5b2
+- https://goo.gl/forms/vLfHB2otpSjYSFQK2
+- https://goo.gl/forms/yiQnoJ5zbieMHneu2
+
 ## Ablauf
 
 1. Begrüßung
 2. Allgemeine Personenangaben (Fragebogen 1)
 3. Erläuterung des Evaluationsablaufs
-4. Einführung Softwarevisualisierung (mündlich)
+4. Einführung in Getaviz
 5. Vorstellung des Testsetups
-6. Aufgaben (Teil I - Fragebogen 2)
+6. Aufgaben (Teil I)
+7. Fragebogen 2
 7. Aufgaben (Teil II - Fragebogen 3)
 8. Feedback (Fragebogen 4)
 

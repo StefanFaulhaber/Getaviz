@@ -482,6 +482,8 @@ class Filter {
 		input.on(
 			'input',
 			FilterHelper.debounce(event => {
+				// console.log('input.on(input)', event.originalEvent.inputType);
+
 				let currentValue = input.val();
 				let options = dataList[0].childNodes;
 
@@ -491,9 +493,12 @@ class Filter {
 						// save input value
 						currentLayer.entity = null;
 						currentLayer.query = currentValue;
-						event.target.filter = filter;
-						filter.apply(event);
-						// console.log('applied filter', filter);
+
+						// only apply when suggestion was selected
+						if (!event.originalEvent.inputType) {
+							event.target.filter = filter;
+							filter.apply(event);
+						}
 
 						break;
 					}
@@ -505,6 +510,8 @@ class Filter {
 		input.on(
 			'change paste keyup',
 			FilterHelper.debounce(event => {
+				// console.log('input.on(change, paste, keyup)');
+
 				// react to enter-keypress
 				if (event.keyCode === 13) {
 					event.target.filter = filter;
