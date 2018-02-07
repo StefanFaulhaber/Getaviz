@@ -15,8 +15,8 @@
 5. Vorstellung des Testsetups
 6. Aufgaben (Teil I)
 7. Fragebogen 2
-7. Aufgaben (Teil II - Fragebogen 3)
-8. Feedback (Fragebogen 4)
+8. Aufgaben (Teil II - Fragebogen 3)
+9. Feedback (Fragebogen 4)
 
 ## Aufgaben
 
