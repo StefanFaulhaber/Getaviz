@@ -99,7 +99,7 @@ Liste aller Transformationen:
 - `visible`
 - `invisible`
 - `transparent`
-- `opaque`
+- `intransparent`
 - `selected`
 - `connected`
 
@@ -111,7 +111,7 @@ Die Transformationen `visible` und `invisible` können Glyphen anzeigen oder aus
 
 #### Transparenz
 
-Die Transformationen `transparent` und `opaque` können Glyphen respektive durchsichtig oder undurchsichtig darstellen.
+Die Transformationen `transparent` und `intransparent` können Glyphen respektive durchsichtig oder undurchsichtig darstellen.
 
 ![Screenshot transparent](img/10.png "Screenshot transparent")  
 
@@ -138,7 +138,7 @@ Darstellung der Klassen `InCallScreen` und `CallCard` mit gleichzeitiger Anzeige
 
 2. Glyphen priorisieren
     - Glyphen mit der Transformation `transparent` in den Hintergrund treten lassen
-    - Glyphen mit der Transformation `opaque` herausstellen
+    - Glyphen mit der Transformation `intransparent` herausstellen
 
 3. Relationen anzeigen
     - Glyphenrelationen mit der Transformation `connected` anzeigen

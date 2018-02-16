@@ -7,7 +7,7 @@
 #taskFieldText {
 	position: absolute;
 	left: 0px;
-	right: 200px;
+	right: 300px;
 	line-height: 1;
 	white-space: normal;
 	font-size: 15px;
@@ -21,8 +21,16 @@
 #taskSolvedButton {
 	position: absolute;
 	top: 0px;
-	right: 0px;
+	right: 100px;
 	width: 200px;
+	height: 125px;
+}
+
+#backButton {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 100px;
 	height: 125px;
 }
 

@@ -16,7 +16,7 @@ var experimentController = (function() {
 		var cssLink = document.createElement('link');
 		cssLink.type = 'text/css';
 		cssLink.rel = 'stylesheet';
-		cssLink.href = 'scripts/Experiment/ec.css';
+		cssLink.href = 'scripts/Experiment/ec1.css';
 		document.getElementsByTagName('head')[0].appendChild(cssLink);
 
 		//interactionLogger.logConfig(config.clickConnector, config.clickTransparency, config.taskOrder.toString());
@@ -53,6 +53,12 @@ var experimentController = (function() {
 		taskSolvedButton.type = 'button';
 		experimentHeaderDiv.appendChild(taskSolvedButton);
 
+		var backButton = document.createElement('INPUT');
+		backButton.id = 'backButton';
+		backButton.value = 'Zurück';
+		backButton.type = 'button';
+		experimentHeaderDiv.appendChild(backButton);
+
 		//taskdialog
 		var taskDialogDiv = document.createElement('DIV');
 		taskDialogDiv.id = 'taskDialog';
@@ -84,6 +90,9 @@ var experimentController = (function() {
 		//taskFieldText and solvedButton
 		$('#taskSolvedButton').jqxButton({ theme: 'metro' });
 		$('#taskSolvedButton').click(taskSolvedButtonClick);
+
+		$('#backButton').jqxButton({ theme: 'metro' });
+		$('#backButton').click(backButtonClick);
 
 		//taskdialog
 		$('#taskDialog').jqxWindow({
@@ -117,13 +126,18 @@ var experimentController = (function() {
 	}
 
 	function taskSolvedButtonClick(event) {
-		if ($('#taskSolvedButton')[0].value == 'Weiter') {
-			$('#taskSolvedButton')[0].value = 'Sicher?';
-			setTimeout(resetSolvedButton, 3000);
-		} else {
-			resetSolvedButton();
-			nextStep();
-		}
+		nextStep();
+		// if ($('#taskSolvedButton')[0].value == 'Weiter') {
+		// 	$('#taskSolvedButton')[0].value = 'Sicher?';
+		// 	setTimeout(resetSolvedButton, 3000);
+		// } else {
+		// 	resetSolvedButton();
+		//  nextStep();
+		// }
+	}
+
+	function backButtonClick(event) {
+		previousStep();
 	}
 
 	function resetSolvedButton() {
@@ -136,8 +150,14 @@ var experimentController = (function() {
 		setNextStep();
 
 		setStepTexts(currentStep.text, 100, 100, 1000, 300, stepTextTime);
+	}
 
-		// application.loadUIConfig(currentStep.ui);
+	function previousStep() {
+		stopTaskTimer();
+
+		setPreviousStep();
+
+		setStepTexts(currentStep.text, 100, 100, 1000, 300, stepTextTime);
 	}
 
 	function setNextStep() {
@@ -151,6 +171,21 @@ var experimentController = (function() {
 				return;
 			}
 		});
+	}
+
+	function setPreviousStep() {
+		if (stepOrderIterator > 1) {
+			stepOrderIterator = stepOrderIterator - 1;
+
+			var nextStepByStepOrder = stepOrder[stepOrderIterator - 1];
+
+			steps.forEach(function(step) {
+				if (step.number == nextStepByStepOrder) {
+					currentStep = step;
+					return;
+				}
+			});
+		}
 	}
 
 	function setStepTexts(textArray, posx, posy, width, height, time) {

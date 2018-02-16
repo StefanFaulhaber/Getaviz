@@ -402,6 +402,7 @@ class DOMHelper {
 		for (let l of c.layers) {
 			// disable elements
 			$('#includeChildsCheckbox-' + l.id).jqxCheckBox({ disabled: !l.activated });
+			$('#searchField-' + l.id).jqxInput({ disabled: !l.activated });
 
 			// set includeChilds checkbox and onChange function
 			$('#includeChildsCheckbox-' + l.id).jqxCheckBox({

@@ -9,10 +9,20 @@
 
 ## TODO
 
+- Stichpunkte für Einführung
+- Hinweistimer nutzen
 
+- Bug: connected-Transformation + relations-Manipulation blendet auch nichtrelationale Elemente mit ein
+- Bug: opaque überschreibt transparent nicht
 
-- Lösungskonfigurationen fertigstellen
 - RelationsController nutzen (David fragen)
+
+## Ideen
+
+- Vorschläge erweitern wie bei Google-Suche
+- include parent Option
+- flyTo-Button für Layer
+- Lanes unterstützen (Verkettung einstellbar machen)
 
 ## Notizen
 

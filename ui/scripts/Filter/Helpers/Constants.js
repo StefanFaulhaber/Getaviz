@@ -2,7 +2,7 @@ let Constants = {
 	transformations: {
 		visible: 'visible',
 		invisible: 'invisible',
-		opaque: 'opaque',
+		opaque: 'intransparent',
 		transparent: 'transparent',
 		selected: 'selected',
 		connected: 'connected'
