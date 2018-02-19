@@ -9,11 +9,7 @@
 
 ## TODO
 
-- Stichpunkte für Einführung
-- Hinweistimer nutzen
-
-- Bug: connected-Transformation + relations-Manipulation blendet auch nichtrelationale Elemente mit ein
-
+- Bug: connected-Transformation + relations-Manipulation blendet auch nicht an Relationen teilhabende Elemente mit ein
 - RelationsController nutzen (David fragen)
 
 ## Ideen

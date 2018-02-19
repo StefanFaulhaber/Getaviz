@@ -468,7 +468,7 @@ class Filter {
 		if (container.inverted)
 			selection = filter.visualizedEntities.filter(ent => selection.indexOf(ent) == -1);
 
-		// console.log(container.id, 'selection final', selection.map(entity => entity.id));
+		// console.log(container.id, 'selection final', selection);
 
 		return selection.map(entity => entity.id);
 	}
