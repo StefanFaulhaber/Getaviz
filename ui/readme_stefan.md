@@ -13,7 +13,6 @@
 - Hinweistimer nutzen
 
 - Bug: connected-Transformation + relations-Manipulation blendet auch nichtrelationale Elemente mit ein
-- Bug: opaque überschreibt transparent nicht
 
 - RelationsController nutzen (David fragen)
 

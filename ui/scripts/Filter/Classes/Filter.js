@@ -349,17 +349,24 @@ class Filter {
 			if (container.layers.every(layer => layer.faulty == false)) {
 				// console.table(Array.from(tMap).map(entry => [entry[0], entry[1].length]));
 
-				TransformationHelper.makeEntitiesVisible(tMap.get(Constants.transformations.visible));
-				TransformationHelper.makeEntitiesInvisible(tMap.get(Constants.transformations.invisible));
-				TransformationHelper.makeEntitiesOpaque(tMap.get(Constants.transformations.opaque));
-				TransformationHelper.makeEntitiesTransparent(
-					tMap.get(Constants.transformations.transparent)
-				);
-				TransformationHelper.selectEntities(tMap.get(Constants.transformations.selected));
-				TransformationHelper.connectEntities(
-					tMap.get(Constants.transformations.connected),
-					filter.loadedPositions
-				);
+				if (tKey == Constants.transformations.visible)
+					TransformationHelper.makeEntitiesVisible(tMap.get(Constants.transformations.visible));
+				else if (tKey == Constants.transformations.invisible)
+					TransformationHelper.makeEntitiesInvisible(tMap.get(Constants.transformations.invisible));
+				else if (tKey == Constants.transformations.transparent) {
+					TransformationHelper.makeEntitiesTransparent(
+						tMap.get(Constants.transformations.transparent)
+					);
+				} else if (tKey == Constants.transformations.opaque)
+					TransformationHelper.makeEntitiesOpaque(tMap.get(Constants.transformations.opaque));
+				else if (tKey == Constants.transformations.selected)
+					TransformationHelper.selectEntities(tMap.get(Constants.transformations.selected));
+				else if (tKey == Constants.transformations.connected) {
+					TransformationHelper.connectEntities(
+						tMap.get(Constants.transformations.connected),
+						filter.loadedPositions
+					);
+				}
 			} else {
 				// reset transformations
 				TransformationHelper.resetTransformations(filter);
